@@ -51,8 +51,7 @@ app.use(express.static(path.join(__dirname, 'libs')));
 
 // 对于根目录下的 HTML 和其他文件，你需要用一个特殊的静态目录设置
 // 这会让 Express 在根目录寻找文件
-app.use(express.static(path.join(__dirname, '/')));
-
+app.use(express.static(__dirname));
 function sha256Hash(input) {
   return new Promise((resolve) => {
     const hash = crypto.createHash('sha256');
