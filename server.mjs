@@ -43,6 +43,15 @@ app.use((req, res, next) => {
   res.setHeader('X-XSS-Protection', '1; mode=block');
   next();
 });
+// 为每个静态资源目录都添加一行
+app.use(express.static(path.join(__dirname, 'js')));
+app.use(express.static(path.join(__dirname, 'css')));
+app.use(express.static(path.join(__dirname, 'image')));
+app.use(express.static(path.join(__dirname, 'libs')));
+
+// 对于根目录下的 HTML 和其他文件，你需要用一个特殊的静态目录设置
+// 这会让 Express 在根目录寻找文件
+app.use(express.static(path.join(__dirname, '/')));
 
 function sha256Hash(input) {
   return new Promise((resolve) => {
